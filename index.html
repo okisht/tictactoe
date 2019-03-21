@@ -135,7 +135,7 @@
 
             if (moveCounter == 1) {
                 if (valueMatris[4] === 0) {
-                    $('.ttt-box').eq(4).attr("data-value",1);
+                    $('.ttt-box').eq(4).attr("data-value",2);
                     $('.ttt-box').eq(4).text("O");
                     moveCounter = moveCounter +1;
                 }
@@ -143,7 +143,7 @@
                 else if (valueMatris[4] === 1) {
                     var randmMoves = [0,2,6,8]; 
                     var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
-                    $('.ttt-box').eq(randmMove).attr("data-value",1);
+                    $('.ttt-box').eq(randmMove).attr("data-value",2);
                     $('.ttt-box').eq(randmMove).text("O");
                     moveCounter = moveCounter +1;
                 }
@@ -151,6 +151,11 @@
             }
 
             else if (moveCounter == 3) {
+
+            const decidedMove =  checkIfOpntnWin(valueMatris);
+            $('.ttt-box').eq(decidedMove).attr("data-value",2);
+            $('.ttt-box').eq(decidedMove).text("O");
+            moveCounter = moveCounter +1;
                 
             }
 
@@ -166,8 +171,164 @@
 
             return dataVls;
         }
-    }
-    )
+
+        function checkIfOpntnWin(valuesMatriss) {
+
+
+            for(i=0; i<valuesMatriss.length; i++) {
+                if ( i == 0 ) {
+                    if (valuesMatriss[i] === 1) {
+
+                        if (valuesMatriss[i+1] === 1) {
+                            return 2;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+3] === 1) {
+                            return 6;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+4] === 1) {
+                            return 8;
+                            break;
+                        }
+
+                        /*
+                        check 
+                        0-1
+                        0-3
+                        0-4
+                        */
+                    }
+
+                }
+
+                if ( i == 2 ) { 
+                    if (valuesMatriss[i] == 1) {
+
+                        if (valuesMatriss[i-1] === 1) {
+                            return 0;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+2] === 1) {
+                            return 6;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+3] === 1) {
+                            return 7;
+                            break;
+                        }
+
+                        /*
+                        check 
+                        2-1
+                        2-4
+                        2-5
+                        */
+                    }
+
+                }
+
+                if ( i == 4 ) { 
+                    if (valuesMatriss[i] == 1) {
+
+                        if (valuesMatriss[i-3] === 1) {
+                            return 7;
+                            break;
+                        }
+
+                        if (valuesMatriss[i-1] === 1) {
+                            return 5;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+1] === 1) {
+                            return 3;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+3] === 1) {
+                            return 0;
+                            break;
+                        }
+                        /*
+                        check 
+                        4-1
+                        4-3
+                        4-5
+                        4-7
+                        */
+                    }
+
+                }
+
+                if ( i == 6 ) { 
+                    if (valuesMatriss[i] == 1) {
+
+                        
+                        if (valuesMatriss[i-3] === 1) {
+                            return 0;
+                            break;
+                        }
+
+                        if (valuesMatriss[i-2] === 1) {
+                            return 2;
+                            break;
+                        }
+
+                        if (valuesMatriss[i+1] === 1) {
+                            return 8;
+                            break;
+                        }
+
+                        /*
+                        check 
+                        6-3
+                        6-4
+                        6-7
+                        */
+                    }
+
+                }
+
+                if ( i == 8 ) { 
+                    if (valuesMatriss[i] == 1) {
+
+                        if (valuesMatriss[i-4] === 1) {
+                            return 0;
+                            break;
+                        }
+
+                        if (valuesMatriss[i-3] === 1) {
+                            return 3;
+                            break;
+                        }
+
+                        if (valuesMatriss[i-1] === 1) {
+                            return 6;
+                            break;
+                        }
+
+                        /*
+                        check 
+                        8-4
+                        8-5
+                        8-7
+                        */
+                    }
+
+                }
+
+            }
+
+
+
+        }
+
+    })
 
 
 </script>
