@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,87 +9,88 @@
 
 
     <style>
+        .tttContainer {
+            width: 156px;
+        }
 
-    .tttContainer {
-        width: 156px;
-    }
-    
-    .ttt {
-    display: flex;
-    flex-wrap: wrap;
-    }
+        .ttt {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-    .ttt-box {
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
-    }
-    
-    
-    
+        .ttt-box {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+        }
     </style>
 
 
 </head>
+
 <body>
-    
-<div class="tttContainer">
-    <div class="ttt">
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
-        <div class="ttt-box" data-value="0"></div>
+
+    <div class="tttContainer">
+        <div class="ttt">
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+            <div class="ttt-box" data-value="0"></div>
+        </div>
+
+        <select>
+            <option value="vsComputer">Play vs computer!</option>
+            <option value="vsPlayer">Play vs Player!</option>
+        </select>
     </div>
 
-    <select>
-        <option value="vsComputer">Play vs computer!</option>
-        <option value="vsPlayer">Play vs Player!</option>
-      </select>
-</div>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+        </script>
 
-<script
-  src="http://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous">
-</script>
+    <script>
+        var moveCounter = 0;
+        var userPlays = 1;
 
-<script>
-    var moveCounter = 0;
-    $('.ttt-box').click(function () {
+        $('.ttt-box').click(function () {
 
-        var ind = $('.ttt-box').index(this) + 1;
-        var getVal = parseInt($(this).attr("data-value"));
+            var ind = $('.ttt-box').index(this) + 1;
+            var getVal = parseInt($(this).attr("data-value"));
 
-        if (getVal === 0 && moveCounter%2 === 0 ) {
-            $(this).attr("data-value",1);
-            $(this).text("X");
-            moveCounter = moveCounter +1;
-            winStatement();
+            if (getVal === 0 && moveCounter % 2 === 0) {
+                $(this).attr("data-value", 1);
+                $(this).text("X");
             }
 
-        else if ( getVal === 0 && moveCounter%2 === 1 ) {
-            $(this).attr("data-value",2);
-            $(this).text("O");
-            moveCounter = moveCounter +1;
-            winStatement();
-        }
+            else if (getVal === 0 && moveCounter % 2 === 1) {
+                $(this).attr("data-value", 2);
+                $(this).text("O");
+            }
 
-        const vsToWho = $('select').val();
-        if (vsToWho === 'vsComputer') {
-            nextMove();
-        }
+            winStatement();
+            moveCounter = moveCounter + 1;
+
+            const vsToWho = $('select').val();
+            if (vsToWho === 'vsComputer') {
+                nextMove(userPlays);
+            }
+
+
+
+
+        })
 
         function winStatement() {
 
-        var dataValues = collectValues();
-       
-            for (j=0; j < 3; j++) {
-                if ( (dataValues[j] === dataValues[j + 3]) && (dataValues[j + 3] === dataValues[j + 6]) ) {
+            var dataValues = collectValues();
+
+            for (j = 0; j < 3; j++) {
+                if ((dataValues[j] === dataValues[j + 3]) && (dataValues[j + 3] === dataValues[j + 6])) {
 
                     if (dataValues[j] === 2) {
                         console.log("O kazandı");
@@ -100,9 +102,9 @@
 
             }
 
-            for (k=0; k<9; k++) {
-                if ( (dataValues[k] === dataValues[k + 1]) && (dataValues[k + 1] === dataValues[k + 2]) ) {
-                    
+            for (k = 0; k < 9; k++) {
+                if ((dataValues[k] === dataValues[k + 1]) && (dataValues[k + 1] === dataValues[k + 2])) {
+
                     if (dataValues[k] === 2) {
                         console.log("O kazandı");
                     }
@@ -110,53 +112,19 @@
                         console.log("X kazandı");
                     }
                 }
-                k = k +2;
+                k = k + 2;
             }
 
 
-            if ( ( (dataValues[0] === dataValues[4]) && (dataValues[4] === dataValues[8])  )|| ((dataValues[2] === dataValues[4]) && (dataValues[4] === dataValues[6])) ) {
-                
+            if (((dataValues[0] === dataValues[4]) && (dataValues[4] === dataValues[8])) || ((dataValues[2] === dataValues[4]) && (dataValues[4] === dataValues[6]))) {
+
                 if (dataValues[4] === 2) {
-                        console.log("O kazandı");
-                    }
-                    else if (dataValues[4] === 1) {
-                        console.log("X kazandı");
-                    }
-
-            }
-
-
-        }
-    
-    
-        function nextMove(){
-
-            const valueMatris = collectValues();
-
-            if (moveCounter == 1) {
-                if (valueMatris[4] === 0) {
-                    $('.ttt-box').eq(4).attr("data-value",2);
-                    $('.ttt-box').eq(4).text("O");
-                    moveCounter = moveCounter +1;
+                    console.log("O kazandı");
+                }
+                else if (dataValues[4] === 1) {
+                    console.log("X kazandı");
                 }
 
-                else if (valueMatris[4] === 1) {
-                    var randmMoves = [0,2,6,8]; 
-                    var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
-                    $('.ttt-box').eq(randmMove).attr("data-value",2);
-                    $('.ttt-box').eq(randmMove).text("O");
-                    moveCounter = moveCounter +1;
-                }
-
-            }
-
-            else if (moveCounter == 3) {
-
-            const decidedMove =  checkIfOpntnWin(valueMatris);
-            $('.ttt-box').eq(decidedMove).attr("data-value",2);
-            $('.ttt-box').eq(decidedMove).text("O");
-            moveCounter = moveCounter +1;
-                
             }
 
 
@@ -164,32 +132,97 @@
 
         function collectValues() {
             var dataVls = [];
-            var k= $('.ttt-box').length;
-            for(i=0; i<k; i++) {
+            var k = $('.ttt-box').length;
+            for (i = 0; i < k; i++) {
                 dataVls.push(parseInt($('.ttt-box').eq(i).attr('data-value')));
             }
 
             return dataVls;
         }
 
-        function checkIfOpntnWin(valuesMatriss) {
+        function nextMove(userPlaying) {
+
+            var defineUser = "";
+            var defineVal = 0;
+
+            if (userPlaying == 1) {
+                defineUser = "O";
+                defineVal = 2;
+
+            }
+
+            else {
+                defineUser = "X";
+                defineVal = 1;
+            }
+
+            const valueMatris = collectValues();
+
+            if (moveCounter == 1) {
+                if (valueMatris[4] === 0) {
+                    $('.ttt-box').eq(4).attr("data-value", defineVal);
+                    $('.ttt-box').eq(4).text(defineUser);
+                    moveCounter = moveCounter + 1;
+                    winStatement();
+                }
+
+                else if (valueMatris[4] === 1) {
+                    var randmMoves = [0, 2, 6, 8];
+                    var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
+                    $('.ttt-box').eq(randmMove).attr("data-value", defineVal);
+                    $('.ttt-box').eq(randmMove).text(defineUser);
+                    moveCounter = moveCounter + 1;
+                    winStatement();
+                }
+
+            }
+
+            else if (moveCounter % 2 == 1) {
+
+                const winMove = checkIfOpntnWin(valueMatris, 2);
+                if (winMove === undefined || winMove === null) {
+                    const decidedMove = checkIfOpntnWin(valueMatris, userPlaying);
+                    $('.ttt-box').eq(decidedMove).attr("data-value", defineVal);
+                    $('.ttt-box').eq(decidedMove).text(defineUser);
+
+                    if (decidedMove === undefined || decidedMove === null) {
+                        console.log("me null");
+                    }
+                }
+
+                else {
+                    $('.ttt-box').eq(winMove).attr("data-value", defineVal);
+                    $('.ttt-box').eq(winMove).text(defineUser);
+
+                }
+
+                moveCounter = moveCounter + 1;
+                winStatement();
+
+            }
 
 
-            for(i=0; i<valuesMatriss.length; i++) {
-                if ( i == 0 ) {
-                    if (valuesMatriss[i] === 1) {
 
-                        if (valuesMatriss[i+1] === 1) {
+        }
+
+
+        function checkIfOpntnWin(valuesMatriss, checkVal) {
+
+            for (i = 0; i < valuesMatriss.length; i++) {
+                if (i == 0) {
+                    if (valuesMatriss[i] === checkVal) {
+
+                        if (valuesMatriss[i + 1] === checkVal && valuesMatriss[2] === 0) {
                             return 2;
                             break;
                         }
 
-                        if (valuesMatriss[i+3] === 1) {
+                        if (valuesMatriss[i + 3] === checkVal && valuesMatriss[6] === 0) {
                             return 6;
                             break;
                         }
 
-                        if (valuesMatriss[i+4] === 1) {
+                        if (valuesMatriss[i + 4] === checkVal && valuesMatriss[8] === 0) {
                             return 8;
                             break;
                         }
@@ -204,21 +237,21 @@
 
                 }
 
-                if ( i == 2 ) { 
-                    if (valuesMatriss[i] == 1) {
+                else if (i == 2) {
+                    if (valuesMatriss[i] == checkVal) {
 
-                        if (valuesMatriss[i-1] === 1) {
+                        if (valuesMatriss[i - 1] === checkVal && valuesMatriss[0] === 0) {
                             return 0;
                             break;
                         }
 
-                        if (valuesMatriss[i+2] === 1) {
+                        if (valuesMatriss[i + 2] === checkVal && valuesMatriss[6] === 0) {
                             return 6;
                             break;
                         }
 
-                        if (valuesMatriss[i+3] === 1) {
-                            return 7;
+                        if (valuesMatriss[i + 3] === checkVal && valuesMatriss[8] === 0) {
+                            return 8;
                             break;
                         }
 
@@ -232,26 +265,26 @@
 
                 }
 
-                if ( i == 4 ) { 
-                    if (valuesMatriss[i] == 1) {
+                else if (i == 4) {
+                    if (valuesMatriss[i] == checkVal) {
 
-                        if (valuesMatriss[i-3] === 1) {
+                        if (valuesMatriss[i - 3] === checkVal && valuesMatriss[7] === 0) {
                             return 7;
                             break;
                         }
 
-                        if (valuesMatriss[i-1] === 1) {
+                        if (valuesMatriss[i - 1] === checkVal && valuesMatriss[5] === 0) {
                             return 5;
                             break;
                         }
 
-                        if (valuesMatriss[i+1] === 1) {
+                        if (valuesMatriss[i + 1] === checkVal && valuesMatriss[3] === 0) {
                             return 3;
                             break;
                         }
 
-                        if (valuesMatriss[i+3] === 1) {
-                            return 0;
+                        if (valuesMatriss[i + 3] === checkVal && valuesMatriss[1] === 0) {
+                            return 1;
                             break;
                         }
                         /*
@@ -265,21 +298,21 @@
 
                 }
 
-                if ( i == 6 ) { 
-                    if (valuesMatriss[i] == 1) {
+                else if (i == 6) {
+                    if (valuesMatriss[i] == checkVal) {
 
-                        
-                        if (valuesMatriss[i-3] === 1) {
+
+                        if (valuesMatriss[i - 3] === checkVal && valuesMatriss[0] === 0) {
                             return 0;
                             break;
                         }
 
-                        if (valuesMatriss[i-2] === 1) {
+                        if (valuesMatriss[i - 2] === checkVal && valuesMatriss[2] === 0) {
                             return 2;
                             break;
                         }
 
-                        if (valuesMatriss[i+1] === 1) {
+                        if (valuesMatriss[i + 1] === checkVal && valuesMatriss[8] === 0) {
                             return 8;
                             break;
                         }
@@ -294,20 +327,20 @@
 
                 }
 
-                if ( i == 8 ) { 
-                    if (valuesMatriss[i] == 1) {
+                else if (i == 8) {
+                    if (valuesMatriss[i] == checkVal) {
 
-                        if (valuesMatriss[i-4] === 1) {
+                        if (valuesMatriss[i - 4] === checkVal && valuesMatriss[0] === 0) {
                             return 0;
                             break;
                         }
 
-                        if (valuesMatriss[i-3] === 1) {
-                            return 3;
+                        if (valuesMatriss[i - 3] === checkVal && valuesMatriss[2] === 0) {
+                            return 2;
                             break;
                         }
 
-                        if (valuesMatriss[i-1] === 1) {
+                        if (valuesMatriss[i - 1] === checkVal && valuesMatriss[6] === 0) {
                             return 6;
                             break;
                         }
@@ -324,18 +357,12 @@
 
             }
 
-
-
         }
 
-    })
 
 
-</script>
-
+    </script>
 
 </body>
-
-
 
 </html>
