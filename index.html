@@ -186,23 +186,28 @@
                     $('.ttt-box').eq(decidedMove).text(defineUser);
 
                     if (decidedMove === undefined || decidedMove === null) {
-                        console.log("me null");
+
+                        var anyMoveCont = [];
+                        for (j=0;j < valueMatris.length; j++) {
+                            if (valueMatris[j] === 0) {
+                                anyMoveCont.push(j);
+                            }
+                        }
+                        var anyMove = anyMoveCont[Math.floor(Math.random() * anyMoveCont.length)];
+                        $('.ttt-box').eq(anyMove).attr("data-value", defineVal);
+                        $('.ttt-box').eq(anyMove).text(defineUser);
                     }
                 }
 
                 else {
                     $('.ttt-box').eq(winMove).attr("data-value", defineVal);
                     $('.ttt-box').eq(winMove).text(defineUser);
-
                 }
 
                 moveCounter = moveCounter + 1;
                 winStatement();
 
             }
-
-
-
         }
 
 
@@ -227,11 +232,29 @@
                             break;
                         }
 
+                        if (valuesMatriss[i + 2] === checkVal && valuesMatriss[1] === 0) {
+                            return 1;
+                            break;
+                        }
+
+                        if (valuesMatriss[i + 6] === checkVal && valuesMatriss[3] === 0) {
+                            return 3;
+                            break;
+                        }
+
+                        if (valuesMatriss[i + 8] === checkVal && valuesMatriss[4] === 0) {
+                            return 4;
+                            break;
+                        }
+
                         /*
                         check 
                         0-1
                         0-3
                         0-4
+                        0-2  
+                        0-6  
+                        0-8
                         */
                     }
 
@@ -255,11 +278,23 @@
                             break;
                         }
 
+                        if (valuesMatriss[i + 6] === checkVal && valuesMatriss[5] === 0) {
+                            return 5;
+                            break;
+                        }
+
+                        if (valuesMatriss[i + 4] === checkVal && valuesMatriss[4] === 0) {
+                            return 4;
+                            break;
+                        }
+
                         /*
                         check 
                         2-1
                         2-4
                         2-5
+                        2-8
+                        2-6
                         */
                     }
 
@@ -317,11 +352,23 @@
                             break;
                         }
 
+                        if (valuesMatriss[i + 2] === checkVal && valuesMatriss[5] === 0) {
+                            return 5;
+                            break;
+                        }
+
+                        if (valuesMatriss[i - 4] === checkVal && valuesMatriss[4] === 0) {
+                            return 4;
+                            break;
+                        }
+
                         /*
                         check 
                         6-3
                         6-4
                         6-7
+                        6-8
+                        6-2
                         */
                     }
 
@@ -355,6 +402,29 @@
 
                 }
 
+
+
+/* çapraz ortası boş durumların kontrolü */
+                else if ( i == 1) {
+                    if (valuesMatriss[i] == checkVal) {
+                        
+                        if (valuesMatriss[i + 6] === checkVal && valuesMatriss[4] === 0) {
+                            return 4;
+                            break;
+                        }
+
+                    }
+
+                    if (valuesMatriss[i + 2] == checkVal) {
+                        
+                        if (valuesMatriss[i + 4] === checkVal && valuesMatriss[4] === 0) {
+                            return 4;
+                            break;
+                        }
+
+                    }
+
+                }
             }
 
         }
