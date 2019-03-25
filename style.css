@@ -51,6 +51,12 @@
     background: transparent;
     transition: width .5s ease, background-color .5s ease;
 }
+
+.tictac > div.selected:after {
+    width: 20% ;
+    background: black;
+}
+
 .tictac > div:hover:after {
     width: 50%;
     background: black;
