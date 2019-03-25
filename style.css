@@ -1,0 +1,87 @@
+.options{
+    height: 300px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.options select {
+    border: none;
+    padding: 5px;
+    margin-top: 140px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid;
+    outline: unset;
+    
+}
+
+.select-items{
+    background-color: red;
+    font-size: 16px;
+    padding: 2px;
+}
+
+.vsSelect, .tictac{
+    display: inline-block;
+    width: 49.7%;
+    margin: 0 auto;
+}
+
+.vsSelect > div {
+    width: max-content;
+    margin: 0 auto;
+}
+
+.tictac > div {
+    width: 49.4%;
+    display: inline-block;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.tictac > div:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 0px;
+    background: transparent;
+    transition: width .5s ease, background-color .5s ease;
+}
+.tictac > div:hover:after {
+    width: 50%;
+    background: black;
+}
+
+
+.tttContainer {
+        width: 156px;
+}
+
+.ttt {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ttt-box {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+}
+
+.drawed {
+    pointer-events: none !important;
+}
+
+
+.vl {
+    border-left: 3px solid black;
+    border-radius: 999px;
+    height: 300px;
+    left: 49.8%;
+    display: inline-block;
+    position: absolute;
+  }
