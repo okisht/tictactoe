@@ -23,6 +23,11 @@
             width: 50px;
             border: 1px solid black;
         }
+
+        .drawed {
+            pointer-events:none !important;
+        }
+
     </style>
 
 
@@ -63,13 +68,15 @@
             var getVal = parseInt($(this).attr("data-value"));
 
             if (getVal === 0 && moveCounter % 2 === 0) {
-                $(this).attr("data-value", 1);
-                $(this).text("X");
+                draw($(this).index(),1,"X");
+              /*  $(this).attr("data-value", 1);
+                $(this).text("X");*/
             }
 
             else if (getVal === 0 && moveCounter % 2 === 1) {
-                $(this).attr("data-value", 2);
-                $(this).text("O");
+                draw($(this).index(),2,"O"); 
+                /*$(this).attr("data-value", 2);
+                $(this).text("O");*/
             }
 
             winStatement();
@@ -79,9 +86,6 @@
             if (vsToWho === 'vsComputer') {
                 nextMove(userPlays);
             }
-
-
-
 
         })
 
@@ -148,7 +152,6 @@
             if (userPlaying == 1) {
                 defineUser = "O";
                 defineVal = 2;
-
             }
 
             else {
@@ -160,8 +163,9 @@
 
             if (moveCounter == 1) {
                 if (valueMatris[4] === 0) {
-                    $('.ttt-box').eq(4).attr("data-value", defineVal);
-                    $('.ttt-box').eq(4).text(defineUser);
+                    draw(4,defineVal,defineUser); 
+                    /*$('.ttt-box').eq(4).attr("data-value", defineVal);
+                    $('.ttt-box').eq(4).text(defineUser);*/
                     moveCounter = moveCounter + 1;
                     winStatement();
                 }
@@ -169,8 +173,9 @@
                 else if (valueMatris[4] === 1) {
                     var randmMoves = [0, 2, 6, 8];
                     var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
-                    $('.ttt-box').eq(randmMove).attr("data-value", defineVal);
-                    $('.ttt-box').eq(randmMove).text(defineUser);
+                    draw(randmMove,defineVal,defineUser); 
+                   /* $('.ttt-box').eq(randmMove).attr("data-value", defineVal);
+                    $('.ttt-box').eq(randmMove).text(defineUser);*/
                     moveCounter = moveCounter + 1;
                     winStatement();
                 }
@@ -182,8 +187,9 @@
                 const winMove = checkIfOpntnWin(valueMatris, 2);
                 if (winMove === undefined || winMove === null) {
                     const decidedMove = checkIfOpntnWin(valueMatris, userPlaying);
-                    $('.ttt-box').eq(decidedMove).attr("data-value", defineVal);
-                    $('.ttt-box').eq(decidedMove).text(defineUser);
+                    draw(decidedMove,defineVal,defineUser); 
+                    /*$('.ttt-box').eq(decidedMove).attr("data-value", defineVal);
+                    $('.ttt-box').eq(decidedMove).text(defineUser);*/
 
                     if (decidedMove === undefined || decidedMove === null) {
 
@@ -194,14 +200,16 @@
                             }
                         }
                         var anyMove = anyMoveCont[Math.floor(Math.random() * anyMoveCont.length)];
-                        $('.ttt-box').eq(anyMove).attr("data-value", defineVal);
-                        $('.ttt-box').eq(anyMove).text(defineUser);
+                        draw(anyMove,defineVal,defineUser); 
+                        /*$('.ttt-box').eq(anyMove).attr("data-value", defineVal);
+                        $('.ttt-box').eq(anyMove).text(defineUser);*/
                     }
                 }
 
                 else {
-                    $('.ttt-box').eq(winMove).attr("data-value", defineVal);
-                    $('.ttt-box').eq(winMove).text(defineUser);
+                    draw(winMove,defineVal,defineUser); 
+                    /*$('.ttt-box').eq(winMove).attr("data-value", defineVal);
+                    $('.ttt-box').eq(winMove).text(defineUser);*/
                 }
 
                 moveCounter = moveCounter + 1;
@@ -402,8 +410,6 @@
 
                 }
 
-
-
 /* çapraz ortası boş durumların kontrolü */
                 else if ( i == 1) {
                     if (valuesMatriss[i] == checkVal) {
@@ -429,7 +435,11 @@
 
         }
 
-
+        function draw(getMove,getDefinedVal,getDefinedUser) {
+            $('.ttt-box').eq(getMove).attr("data-value", getDefinedVal);
+            $('.ttt-box').eq(getMove).text(getDefinedUser);
+            $('.ttt-box').eq(getMove).addClass("drawed");
+        }
 
     </script>
 
