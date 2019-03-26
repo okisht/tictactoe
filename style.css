@@ -7,12 +7,11 @@
 .options select {
     border: none;
     padding: 5px;
-    margin-top: 140px;
+    margin-top: 85px;
     font-size: 16px;
     font-weight: bold;
     border-bottom: 1px solid;
     outline: unset;
-    
 }
 
 .select-items{
@@ -53,41 +52,127 @@
 }
 
 .tictac > div.selected:after {
-    width: 20% ;
+    width: 30% ;
     background: black;
 }
 
 .tictac > div:hover:after {
-    width: 50%;
+    width: 60%;
     background: black;
 }
 
-
 .tttContainer {
-        width: 156px;
+        width: 216px;
+        margin: 0 auto;
+        margin-top: 5%;
 }
 
 .ttt {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
 }
 
 .ttt-box {
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     border: 1px solid black;
+    text-align: center;
+    line-height: 70px;
+    font-size: 25px;
 }
 
 .drawed {
     pointer-events: none !important;
 }
 
-
 .vl {
     border-left: 3px solid black;
     border-radius: 999px;
-    height: 300px;
+    height: 200px;
     left: 49.8%;
     display: inline-block;
     position: absolute;
   }
+
+  .btn {
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 25px 80px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    border: 2px solid black;
+    color: black;
+    overflow: hidden;
+}  
+
+.btn:after  {
+    width: 100%;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    background: black;
+    color: #fff;
+    opacity: 0;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.btn:hover:after {
+    height: 230%;
+    opacity: 1;
+}
+
+.btn:hover{
+    color: #fff;
+    border:none;
+    padding: 27px 82px;
+}
+
+.startbtn{
+    margin-top: 70px;
+}
+
+.startbtn > div {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+
+.ttt-box:nth-child(1), .ttt-box:nth-child(2),.ttt-box:nth-child(3) {
+    border-top:none;
+    border-bottom:2px solid black;
+ }
+ 
+ .ttt-box:nth-child(7), .ttt-box:nth-child(8),.ttt-box:nth-child(9) {
+    border-bottom:none;
+    border-top:2px solid black;
+ }
+ 
+ .ttt-box:nth-child(1),.ttt-box:nth-child(4), .ttt-box:nth-child(7){
+    border-left:none;
+    border-right:2px solid black;
+ }
+ 
+ .ttt-box:nth-child(3),.ttt-box:nth-child(6), .ttt-box:nth-child(9){
+    border-right:none;
+    border-left:2px solid black;
+ }
+ 

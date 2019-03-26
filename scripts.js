@@ -1,23 +1,51 @@
 var moveCounter = 0;
 var userPlays = 1;
-
+var defineVal = 0;
 var defineUser = "";
 var opponent = "";
-var defineVal = 0;
+var vsToWho = "";
 
-if (userPlays == 1) {
-    defineUser = "X";
-    defineVal = 1;
-    opponent = "O";
-    optVal = 2;
-}
 
-else {
-    defineUser = "O";
-    defineVal = 2;
-    opponent = "X";
-    optVal = 1;
-}
+/* check
+1-3  0
+1-5  2
+3-7  6
+5-7  8*/
+
+
+
+sideSelect();
+
+$('button.btn').click(function() {
+
+    vsToWho = $('select').val();
+
+    for(i=0;i < $('.tictac > div').length; i++) {
+        if ($('.tictac > div').eq(i).hasClass("selected")) {
+            userPlays = i + 1 ;
+        }
+    }
+
+    if (userPlays == 1) {
+        defineUser = "X";
+        defineVal = 1;
+        opponent = "O";
+        optVal = 2;
+    }
+    
+    else {
+        defineUser = "O";
+        defineVal = 2;
+        opponent = "X";
+        optVal = 1;
+    }
+    
+
+    $('.options').hide();
+    $('.ttt').css('display','flex');
+
+})
+
 
 
 $('.ttt-box').click(function () {
@@ -25,7 +53,7 @@ $('.ttt-box').click(function () {
     var ind = $('.ttt-box').index(this) + 1;
     var getDataVal = parseInt($(this).attr("data-value"));
     var clickedIndex = $(this).index();
-    const vsToWho = $('select').val();
+
 
     moveCalc(getDataVal, vsToWho, clickedIndex);
     winStatement();
@@ -93,7 +121,7 @@ function nextMove(userPlays) {
 
     if (moveCounter == 1) {
         if (valueMatris[4] === 0) {
-            draw(4, defineVal, opponent);
+            draw(4, optVal, opponent);
             moveCounter = moveCounter + 1;
             winStatement();
         }
@@ -101,28 +129,35 @@ function nextMove(userPlays) {
         else if (valueMatris[4] !== 0) {
             var randmMoves = [0, 2, 6, 8];
             var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
-            draw(randmMove, defineVal, opponent);
+            draw(randmMove, optVal, opponent);
             moveCounter = moveCounter + 1;
             winStatement();
         }
 
     }
 
-    else if (moveCounter % 2 == 1) {
+    else if (moveCounter %2 == 1) {
 
-        const winMove = checkWinChange(valueMatris, 2);
-        if (winMove === undefined || winMove === null) {
-            const decidedMove = checkWinChange(valueMatris, userPlays);
-            draw(decidedMove, defineVal, opponent);
+// opt val 2 ile değiştirildi //
+        var winMove = checkWinChange(valueMatris, defineVal);
+        var newwinMove = checkWinChange(valueMatris, optVal);
+        if (newwinMove > -1) {
+            winMove = newwinMove;
+            draw(winMove, optVal, opponent);
+        }
+        
+        else if (winMove === undefined || winMove === null) {
+            var decidedMove = checkWinChange(valueMatris, userPlays);
+            draw(decidedMove, optVal, opponent);
 
             if (decidedMove === undefined || decidedMove === null) {
                 var getAdvice = moveAdvice(valueMatris)
-                draw(getAdvice, defineVal, opponent);
+                draw(getAdvice, optVal, opponent);
             }
         }
 
         else {
-            draw(winMove, defineVal, opponent);
+            draw(winMove, optVal, opponent);
         }
 
         moveCounter = moveCounter + 1;
@@ -272,8 +307,8 @@ function checkWinChange(valuesMatriss, checkVal) {
                     break;
                 }
 
-                if (valuesMatriss[i + 2] === checkVal && valuesMatriss[5] === 0) {
-                    return 5;
+                if (valuesMatriss[i + 2] === checkVal && valuesMatriss[7] === 0) {
+                    return 7;
                     break;
                 }
 
@@ -331,12 +366,37 @@ function checkWinChange(valuesMatriss, checkVal) {
                     break;
                 }
 
+                if (valuesMatriss[i + 2] === checkVal && valuesMatriss[0] === 0) {
+                    return 0;
+                    break;
+                }
+
+                if (valuesMatriss[i + 4] === checkVal && valuesMatriss[2] === 0) {
+                    return 2;
+                    break;
+                }
+
+
             }
 
             if (valuesMatriss[i + 2] == checkVal) {
 
                 if (valuesMatriss[i + 4] === checkVal && valuesMatriss[4] === 0) {
                     return 4;
+                    break;
+                }
+
+                if (valuesMatriss[i + 6] === checkVal && valuesMatriss[6] === 0) {
+                    return 6;
+                    break;
+                }
+
+            }
+
+            if (valuesMatriss[i + 4] == checkVal) {
+
+                if (valuesMatriss[i + 6] === checkVal && valuesMatriss[8] === 0) {
+                    return 8;
                     break;
                 }
 
@@ -378,7 +438,7 @@ function moveCalc(getVal, vsToWho, clckInd) {
 
     if (vsToWho === 'vsComputer') {
         if (getVal === 0 && moveCounter % 2 === 0) {
-            draw(clckInd, optVal, defineUser);
+            draw(clckInd, defineVal, defineUser);
         }
         else if (getVal === 0 && moveCounter % 2 === 1) {
             draw(clckInd, optVal, opponent);
@@ -400,4 +460,19 @@ function draw(getMove, getDefinedVal, getDefinedUser) {
     $('.ttt-box').eq(getMove).text(getDefinedUser);
     $('.ttt-box').eq(getMove).addClass("drawed");
 }
+
+function sideSelect() {
+    $('.tictac > div').click(function() {
+
+        for(i=0;i < $('.tictac > div').length; i++) {
+            $('.tictac > div').eq(i).removeClass("selected");
+        }
+
+        $(this).addClass("selected");
+
+
+    }) 
+
+}
+
 
