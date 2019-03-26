@@ -41,7 +41,7 @@ $('button.btn').click(function() {
     }
     
 
-    $('.options').hide();
+    $('.options').hide(100);
     $('.ttt').css('display','flex');
 
 })
@@ -86,9 +86,11 @@ function winStatement() {
 
             if (dataValues[k] === 2) {
                 console.log("O kazandı");
+               
             }
             else if (dataValues[k] === 1) {
                 console.log("X kazandı");
+                
             }
         }
         k = k + 2;
@@ -102,6 +104,7 @@ function winStatement() {
         else if (dataValues[4] === 1) {
             console.log("X kazandı");
         }
+       
     }
 
 }
@@ -121,7 +124,8 @@ function nextMove(userPlays) {
 
     if (moveCounter == 1) {
         if (valueMatris[4] === 0) {
-            draw(4, optVal, opponent);
+            setTimeout(draw,300,4, optVal, opponent);
+            //draw(4, optVal, opponent);
             moveCounter = moveCounter + 1;
             winStatement();
         }
@@ -129,7 +133,8 @@ function nextMove(userPlays) {
         else if (valueMatris[4] !== 0) {
             var randmMoves = [0, 2, 6, 8];
             var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
-            draw(randmMove, optVal, opponent);
+            setTimeout(draw,300,randmMove, optVal, opponent);
+            //draw(randmMove, optVal, opponent);
             moveCounter = moveCounter + 1;
             winStatement();
         }
@@ -143,21 +148,25 @@ function nextMove(userPlays) {
         var newwinMove = checkWinChange(valueMatris, optVal);
         if (newwinMove > -1) {
             winMove = newwinMove;
-            draw(winMove, optVal, opponent);
+            setTimeout(draw,300,winMove, optVal, opponent);
+           // draw(winMove, optVal, opponent);
         }
         
         else if (winMove === undefined || winMove === null) {
             var decidedMove = checkWinChange(valueMatris, userPlays);
-            draw(decidedMove, optVal, opponent);
+            setTimeout(draw,300,decidedMove, optVal, opponent);
+           // draw(decidedMove, optVal, opponent);
 
             if (decidedMove === undefined || decidedMove === null) {
                 var getAdvice = moveAdvice(valueMatris)
-                draw(getAdvice, optVal, opponent);
+                setTimeout(draw,300,getAdvice, optVal, opponent);
+               // draw(getAdvice, optVal, opponent);
             }
         }
 
         else {
-            draw(winMove, optVal, opponent);
+            setTimeout(draw,300,winMove, optVal, opponent);
+            //draw(winMove, optVal, opponent);
         }
 
         moveCounter = moveCounter + 1;
@@ -438,18 +447,22 @@ function moveCalc(getVal, vsToWho, clckInd) {
 
     if (vsToWho === 'vsComputer') {
         if (getVal === 0 && moveCounter % 2 === 0) {
+           // setTimeout(draw,300,clckInd, defineVal, defineUser);
             draw(clckInd, defineVal, defineUser);
         }
         else if (getVal === 0 && moveCounter % 2 === 1) {
-            draw(clckInd, optVal, opponent);
+            setTimeout(draw,300,clckInd, optVal, opponent);
+           // draw(clckInd, optVal, opponent);
         }
     }
 
     else {
         if (getVal === 0 && moveCounter % 2 === 0) {
+            //setTimeout(draw,300,clckInd, defineVal, defineUser);
             draw(clckInd, defineVal, defineUser);
         }
         else if (getVal === 0 && moveCounter % 2 === 1) {
+           // setTimeout(draw,300,clckInd, optVal, opponent);
             draw(clckInd, optVal, opponent);
         }
     }
@@ -476,3 +489,13 @@ function sideSelect() {
 }
 
 
+$('select').change(function(){ 
+    
+    if ($(this).val() == "vsPlayer") {
+        $('.player').fadeIn();
+    }
+
+    else{
+        $('.player').fadeOut();
+    }
+});

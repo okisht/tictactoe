@@ -24,6 +24,7 @@
     display: inline-block;
     width: 49.7%;
     margin: 0 auto;
+    position: relative;
 }
 
 .vsSelect > div {
@@ -39,6 +40,21 @@
     font-weight: bold;
     position: relative;
     padding-bottom: 3px;
+    cursor: default;
+}
+
+.tictac > div.player{
+    display: none;
+    font-size: 13px;
+    position: absolute;
+}
+
+.tictac > .player:last-of-type{
+    margin-left: 50.6%;
+}
+
+.player::after, .player:hover:after{
+    display: none;
 }
 
 .tictac > div:after {
@@ -176,3 +192,55 @@
     border-left:2px solid black;
  }
  
+ .ttt-box.winner{
+     position: relative;
+ }
+
+ .ttt-box.winner:after {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2px;
+    background: black;
+    content: "";
+    width: 100%;
+    display: none;
+}
+
+ @media only screen and (max-width: 768px) { 
+
+    .options{
+        width: 90%;
+    }
+
+    .options select{
+        border:none;
+    }
+
+    .vsSelect { 
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: 3px solid black;
+    }
+    
+    .tictac{ 
+        padding-top: 20px;
+        width: 80%;
+        display: block;
+    }
+
+    .tictac > div.selected:after {
+        width: 60% ;
+    }
+
+    .tictac > div {
+        width: 49%;
+    }
+    .vl{
+        display: none;
+    }
+
+    .tttContainer{
+        margin-top: 25%;
+    }
+}
