@@ -31,6 +31,7 @@ $('button.btn').click(function() {
         defineVal = 1;
         opponent = "O";
         optVal = 2;
+
     }
     
     else {
@@ -40,9 +41,16 @@ $('button.btn').click(function() {
         optVal = 1;
     }
     
-
     $('.options').hide(100);
     $('.ttt').css('display','flex');
+    $('.playerTurn').show();
+
+    if (vsToWho === 'vsPlayer') {
+        $('.playerTurn').text(defineUser + " Playing");
+    }
+    else if(vsToWho === 'vsComputer') {
+        $('.playerTurn').text("You are playing with " + defineUser);
+    }
 
 })
 
@@ -50,14 +58,12 @@ $('button.btn').click(function() {
 
 $('.ttt-box').click(function () {
 
-    var ind = $('.ttt-box').index(this) + 1;
     var getDataVal = parseInt($(this).attr("data-value"));
     var clickedIndex = $(this).index();
-
-
     moveCalc(getDataVal, vsToWho, clickedIndex);
     winStatement();
-    moveCounter = moveCounter + 1;
+    movefunc();
+    //moveCounter = moveCounter + 1;
 
     if (vsToWho === 'vsComputer') {
         nextMove(userPlays);
@@ -126,7 +132,8 @@ function nextMove(userPlays) {
         if (valueMatris[4] === 0) {
             setTimeout(draw,300,4, optVal, opponent);
             //draw(4, optVal, opponent);
-            moveCounter = moveCounter + 1;
+            movefunc();
+            //moveCounter = moveCounter + 1;
             winStatement();
         }
 
@@ -135,7 +142,8 @@ function nextMove(userPlays) {
             var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
             setTimeout(draw,300,randmMove, optVal, opponent);
             //draw(randmMove, optVal, opponent);
-            moveCounter = moveCounter + 1;
+            movefunc();
+            //moveCounter = moveCounter + 1;
             winStatement();
         }
 
@@ -169,7 +177,8 @@ function nextMove(userPlays) {
             //draw(winMove, optVal, opponent);
         }
 
-        moveCounter = moveCounter + 1;
+        movefunc();
+        //moveCounter = moveCounter + 1;
         winStatement();
 
     }
@@ -300,7 +309,6 @@ function checkWinChange(valuesMatriss, checkVal) {
         else if (i == 6) {
             if (valuesMatriss[i] == checkVal) {
 
-
                 if (valuesMatriss[i - 3] === checkVal && valuesMatriss[0] === 0) {
                     return 0;
                     break;
@@ -384,7 +392,6 @@ function checkWinChange(valuesMatriss, checkVal) {
                     return 2;
                     break;
                 }
-
 
             }
 
@@ -485,6 +492,25 @@ function sideSelect() {
 
 
     }) 
+
+}
+
+function movefunc() {
+    moveCounter = moveCounter + 1;
+
+    if (vsToWho === 'vsPlayer') {
+        if(moveCounter%2 == 0) {
+            $('.playerTurn').text(defineUser + " Playing");
+        }
+        
+        else if (moveCounter < 9){
+            $('.playerTurn').text(opponent + " Playing");
+        }
+    }
+
+    if (moveCounter == 9) {
+        console.log("gameover");
+    }
 
 }
 
