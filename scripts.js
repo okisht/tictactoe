@@ -4,7 +4,7 @@ var defineVal = 0;
 var defineUser = "";
 var opponent = "";
 var vsToWho = "";
-
+var scorebrd = [0,0];
 
 /* check
 1-3  0
@@ -78,9 +78,13 @@ function winStatement() {
         if ((dataValues[j] === dataValues[j + 3]) && (dataValues[j + 3] === dataValues[j + 6])) {
 
             if (dataValues[j] === 2) {
+                var winValues = [j, j+3 , j+6];
+                winner(winValues,1,2); 
                 console.log("O kazandı");
             }
             else if (dataValues[j] === 1) {
+                var winValues = [j, j+3 , j+6];
+                winner(winValues,1,1);
                 console.log("X kazandı");
             }
         }
@@ -91,10 +95,14 @@ function winStatement() {
         if ((dataValues[k] === dataValues[k + 1]) && (dataValues[k + 1] === dataValues[k + 2])) {
 
             if (dataValues[k] === 2) {
+                var winValues = [k, k+1 , k+2];
+                winner(winValues,0,2);
                 console.log("O kazandı");
                
             }
             else if (dataValues[k] === 1) {
+                var winValues = [k, k+1 , k+2];
+                winner(winValues,0,1);
                 console.log("X kazandı");
                 
             }
@@ -102,16 +110,38 @@ function winStatement() {
         k = k + 2;
     }
 
-    if (((dataValues[0] === dataValues[4]) && (dataValues[4] === dataValues[8])) || ((dataValues[2] === dataValues[4]) && (dataValues[4] === dataValues[6]))) {
+    if ( ((dataValues[2] === dataValues[4]) && (dataValues[4] === dataValues[6]))) {
 
         if (dataValues[4] === 2) {
+            var winValues = [2, 4 , 6];
+            winner(winValues,4,2);
             console.log("O kazandı");
         }
         else if (dataValues[4] === 1) {
+            var winValues = [2, 4 , 6];
+            winner(winValues,4,1);
             console.log("X kazandı");
         }
        
     }
+
+    if ( ((dataValues[0] === dataValues[4]) && (dataValues[4] === dataValues[8]))   ) {
+
+        if (dataValues[4] === 2) {
+            var winValues = [0, 4 , 8];
+            winner(winValues,3,2);
+            console.log("O kazandı");
+        }
+        else if (dataValues[4] === 1) {
+            var winValues = [0, 4 , 8];
+            winner(winValues,3,1);
+            console.log("X kazandı");
+        }
+       
+    }
+
+
+    
 
 }
 
@@ -131,22 +161,14 @@ function nextMove(userPlays) {
     if (moveCounter == 1) {
         if (valueMatris[4] === 0) {
             setTimeout(draw,300,4, optVal, opponent);
-            //draw(4, optVal, opponent);
-            movefunc();
-            //moveCounter = moveCounter + 1;
-            winStatement();
+
         }
 
         else if (valueMatris[4] !== 0) {
             var randmMoves = [0, 2, 6, 8];
             var randmMove = randmMoves[Math.floor(Math.random() * randmMoves.length)];
-            setTimeout(draw,300,randmMove, optVal, opponent);
-            //draw(randmMove, optVal, opponent);
-            movefunc();
-            //moveCounter = moveCounter + 1;
-            winStatement();
+            setTimeout(draw,300,randmMove, optVal, opponent);   
         }
-
     }
 
     else if (moveCounter %2 == 1) {
@@ -177,11 +199,10 @@ function nextMove(userPlays) {
             //draw(winMove, optVal, opponent);
         }
 
-        movefunc();
-        //moveCounter = moveCounter + 1;
-        winStatement();
-
     }
+
+    movefunc();
+    setTimeout (winStatement,320);
 }
 
 
@@ -372,24 +393,45 @@ function checkWinChange(valuesMatriss, checkVal) {
                 */
             }
 
+            if (valuesMatriss[i-7] == checkVal) {
+
+                if (valuesMatriss[i - 5] === checkVal && valuesMatriss[0] === 0) {
+                    return 0;
+                    break;
+                }
+            
+                
+                if (valuesMatriss[i - 3] === checkVal && valuesMatriss[2] === 0) {
+                    return 2;
+                    break;
+                }
+            }
+                           
+            
+            if (valuesMatriss[i-1] == checkVal) {
+            
+                if (valuesMatriss[i - 5] === checkVal && valuesMatriss[6] === 0) {
+                    return 6;
+                    break;
+                }
+            
+                
+                if (valuesMatriss[i - 3] === checkVal && valuesMatriss[8] === 0) {
+                    return 8;
+                    break;
+                }
+            }
+
+
         }
 
         /* çapraz ortası boş durumların kontrolü */
+        // en uçta kalan boşlukların dolu olup olmadığı kontrol edilmeli
         else if (i == 1) {
             if (valuesMatriss[i] == checkVal) {
 
                 if (valuesMatriss[i + 6] === checkVal && valuesMatriss[4] === 0) {
                     return 4;
-                    break;
-                }
-
-                if (valuesMatriss[i + 2] === checkVal && valuesMatriss[0] === 0) {
-                    return 0;
-                    break;
-                }
-
-                if (valuesMatriss[i + 4] === checkVal && valuesMatriss[2] === 0) {
-                    return 2;
                     break;
                 }
 
@@ -402,21 +444,8 @@ function checkWinChange(valuesMatriss, checkVal) {
                     break;
                 }
 
-                if (valuesMatriss[i + 6] === checkVal && valuesMatriss[6] === 0) {
-                    return 6;
-                    break;
-                }
-
             }
 
-            if (valuesMatriss[i + 4] == checkVal) {
-
-                if (valuesMatriss[i + 6] === checkVal && valuesMatriss[8] === 0) {
-                    return 8;
-                    break;
-                }
-
-            }
 
         }
     }
@@ -510,6 +539,68 @@ function movefunc() {
 
     if (moveCounter == 9) {
         console.log("gameover");
+    }
+
+}
+
+function winner(winnerValues,winDirection,whoWins) {
+
+    if (winDirection == 0) {
+        for(l=0;l<winnerValues.length;l++ ) {
+            $('.ttt-box').eq(winnerValues[l]).addClass("horizontal");
+        }
+    }
+
+    else if (winDirection == 1) {
+        for(l=0;l<winnerValues.length;l++ ) {
+            $('.ttt-box').eq(winnerValues[l]).addClass("vertical");
+        }
+    }
+
+    else if (winDirection == 3) {
+        for(l=0;l<winnerValues.length;l++ ) {
+            $('.ttt-box').eq(winnerValues[l]).addClass("bcrosst");
+        }
+    }
+
+    else if (winDirection == 4) {
+        for(l=0;l<winnerValues.length;l++ ) {
+            $('.ttt-box').eq(winnerValues[l]).addClass("tcrossb");
+        }
+    }
+
+    if(whoWins == defineVal) {
+        $('.winner').text(defineUser + "  Won !");
+        if(defineVal == 1) {
+            scorebrd[0] = scorebrd[0] + 1;
+            $('.scoreboard .x').text(scorebrd[0]);
+        }
+        else if(defineVal == 2) {
+            scorebrd[1] = scorebrd[1] + 1;
+            $('.scoreboard .o').text(scorebrd[1]);
+        }
+
+    }
+    else if(whoWins == optVal) {
+        $('.winner').text(opponent + "  Won !");
+        if(optVal == 1) {
+            scorebrd[0] = scorebrd[0] + 1;
+            $('.scoreboard .x').text(scorebrd[0]);
+        }
+        else if(optVal == 2) {
+            scorebrd[1] = scorebrd[1] + 1;
+            $('.scoreboard .o').text(scorebrd[1]);
+        }
+    }
+
+    $('.winner').show(300);
+    $('.scoreboard').show(300);
+    $('.ttt-box').css('opacity','0.35');
+    
+    for(var j=0;j<$('.ttt-box').length;j++) {
+        if(!$('.ttt-box').eq(j).hasClass("drawed")) {
+            $('.ttt-box').eq(j).addClass("done");
+        }
     }
 
 }
