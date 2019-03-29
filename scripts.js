@@ -508,7 +508,7 @@ function draw(getMove, getDefinedVal, getDefinedUser) {
 }
 
 function sideSelect() {
-    $('.tictac > div').on('click tap', function() {
+    $('.tictac > div').on('click touchStart', function() {
 
         for(i=0;i < $('.tictac > div').length; i++) {
             $('.tictac > div').eq(i).removeClass("selected");
@@ -611,7 +611,7 @@ $('select').change(function(){
     }
 });
 
-$(".newMatch .btn").on('click tap', function() {
+$(".newMatch .btn").on('click touchStart', function() {
 
     for(i=0;i < 9 ; i ++) {
         $('.ttt-box').eq(i).removeClass("done drawed horizontal vertical bcrosst tcrossb ");
@@ -626,7 +626,7 @@ $(".newMatch .btn").on('click tap', function() {
     $('.ttt-box').css('opacity','1');
 })
 
-$('.goback').on('click tap', function() {
+$('.goback').on('click touchStart', function() {
     location.reload();
 });
 
