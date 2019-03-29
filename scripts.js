@@ -39,7 +39,7 @@ $('button.btn').click( function() {
         optVal = 1;
     }
     
-    $('.options').hide(100);
+    $('.options').hide();
     $('.ttt').css('display','flex');
     $('.playerTurn').show();
 
