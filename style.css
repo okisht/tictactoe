@@ -355,6 +355,37 @@
 }
 
 
+.newMatch, .goback {
+    text-align: center;
+    position: absolute;
+    right: 115%;
+    top: 22%;
+    display: none;
+}
+
+.newMatch .btn, .goback .btn {
+    margin: 0px;
+    width: 200px;
+    padding: 29px;
+}
+
+.newMatch .btn::after, .goback .btn::after {
+    margin: 0px;
+    width: 60%;
+}
+
+.goback .btn::after {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    content: '';
+}
+
+.goback {
+    left: 130%;
+}
+
 @media only screen and (max-width: 768px) {
 
     .options {
@@ -392,5 +423,22 @@
 
     .tttContainer {
         margin-top: 25%;
+    }
+
+    .newMatch, .goback {
+        right: 0;
+        left: 0;
+    }
+
+    .newMatch .btn, .goback .btn {
+        padding: 13px;
+    }
+
+    .newMatch {
+        top: 115%;
+    }
+
+    .goback {
+        top: 135%;
     }
 }

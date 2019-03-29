@@ -395,31 +395,31 @@ function checkWinChange(valuesMatriss, checkVal) {
 
             if (valuesMatriss[i-7] == checkVal) {
 
-                if (valuesMatriss[i - 5] === checkVal && valuesMatriss[0] === 0) {
+                if ( (valuesMatriss[i - 5] === checkVal && valuesMatriss[0] === 0) && (valuesMatriss[i - 6] != 0 && valuesMatriss[i - 2] != 0 ))  {
                     return 0;
                     break;
-                }
+                } 2-6
             
                 
-                if (valuesMatriss[i - 3] === checkVal && valuesMatriss[2] === 0) {
+                if ( (valuesMatriss[i - 3] === checkVal && valuesMatriss[2] === 0)  && (valuesMatriss[i - 8] != 0 && valuesMatriss[i - 6] != 0 ) ){
                     return 2;
                     break;
-                }
+                } 0-8
             }
                            
             
             if (valuesMatriss[i-1] == checkVal) {
             
-                if (valuesMatriss[i - 5] === checkVal && valuesMatriss[6] === 0) {
+                if ((valuesMatriss[i - 5] === checkVal && valuesMatriss[6] === 0)  && (valuesMatriss[i - 8] != 0 && valuesMatriss[i] != 0 ) ) {
                     return 6;
                     break;
-                }
+                } 0-8
             
                 
-                if (valuesMatriss[i - 3] === checkVal && valuesMatriss[8] === 0) {
+                if ((valuesMatriss[i - 3] === checkVal && valuesMatriss[8] === 0)  && (valuesMatriss[i - 2] != 0 && valuesMatriss[i - 6] != 0 ) ) {
                     return 8;
                     break;
-                }
+                } 6-2
             }
 
 
@@ -539,6 +539,13 @@ function movefunc() {
 
     if (moveCounter == 9) {
         console.log("gameover");
+        $('.winner').text("Draw !");
+        scorebrd[0] = scorebrd[0] + 1;
+        scorebrd[1] = scorebrd[1] + 1;
+        $('.scoreboard .x').text(scorebrd[0]);
+        $('.scoreboard .o').text(scorebrd[1]);
+
+        clearPage();        
     }
 
 }
@@ -592,17 +599,7 @@ function winner(winnerValues,winDirection,whoWins) {
             $('.scoreboard .o').text(scorebrd[1]);
         }
     }
-
-    $('.winner').show(300);
-    $('.scoreboard').show(300);
-    $('.ttt-box').css('opacity','0.35');
-    
-    for(var j=0;j<$('.ttt-box').length;j++) {
-        if(!$('.ttt-box').eq(j).hasClass("drawed")) {
-            $('.ttt-box').eq(j).addClass("done");
-        }
-    }
-
+    clearPage();
 }
 
 
@@ -616,3 +613,37 @@ $('select').change(function(){
         $('.player').fadeOut();
     }
 });
+
+$(".newMatch .btn").click(function playagain() {
+
+    for(i=0;i < 9 ; i ++) {
+        $('.ttt-box').eq(i).removeClass("done drawed horizontal vertical bcrosst tcrossb ");
+        $('.ttt-box').eq(i).attr('data-value',0);
+        $('.ttt-box').eq(i).text("");
+        moveCounter = 0;
+    }
+
+    $('.winner').hide(100);
+    $('.newMatch').hide(100);
+    $('.goback').hide(100);
+    $('.ttt-box').css('opacity','1');
+})
+
+$('.goback').click(function() {
+    location.reload();
+});
+
+
+function clearPage() {
+    $('.winner').show(300);
+    $('.scoreboard').show(300);
+    $('.newMatch').show(500);
+    $('.goback').show(500);
+    $('.ttt-box').css('opacity','0.25');
+    
+    for(var j=0;j<$('.ttt-box').length;j++) {
+        if(!$('.ttt-box').eq(j).hasClass("drawed")) {
+            $('.ttt-box').eq(j).addClass("done");
+        }
+    }
+}
