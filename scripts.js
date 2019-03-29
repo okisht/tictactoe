@@ -16,10 +16,9 @@ var scorebrd = [0,0];
 
 sideSelect();
 
-$('button.btn').click(function() {
+$('button.btn').on('click tap', function() {
 
     vsToWho = $('select').val();
-
     for(i=0;i < $('.tictac > div').length; i++) {
         if ($('.tictac > div').eq(i).hasClass("selected")) {
             userPlays = i + 1 ;
@@ -31,7 +30,6 @@ $('button.btn').click(function() {
         defineVal = 1;
         opponent = "O";
         optVal = 2;
-
     }
     
     else {
@@ -56,8 +54,7 @@ $('button.btn').click(function() {
 
 
 
-$('.ttt-box').click(function () {
-
+$('.ttt-box').on('click tap', function() {
     var getDataVal = parseInt($(this).attr("data-value"));
     var clickedIndex = $(this).index();
     moveCalc(getDataVal, vsToWho, clickedIndex);
@@ -511,7 +508,7 @@ function draw(getMove, getDefinedVal, getDefinedUser) {
 }
 
 function sideSelect() {
-    $('.tictac > div').click(function() {
+    $('.tictac > div').on('click tap', function() {
 
         for(i=0;i < $('.tictac > div').length; i++) {
             $('.tictac > div').eq(i).removeClass("selected");
@@ -614,7 +611,7 @@ $('select').change(function(){
     }
 });
 
-$(".newMatch .btn").click(function playagain() {
+$(".newMatch .btn").on('click tap', function() {
 
     for(i=0;i < 9 ; i ++) {
         $('.ttt-box').eq(i).removeClass("done drawed horizontal vertical bcrosst tcrossb ");
@@ -629,7 +626,7 @@ $(".newMatch .btn").click(function playagain() {
     $('.ttt-box').css('opacity','1');
 })
 
-$('.goback').click(function() {
+$('.goback').on('click tap', function() {
     location.reload();
 });
 
