@@ -16,7 +16,7 @@ var scorebrd = [0,0];
 
 sideSelect();
 
-$('button.btn').on('click tap', function() {
+$('button.btn').on('click touchStart', function() {
 
     vsToWho = $('select').val();
     for(i=0;i < $('.tictac > div').length; i++) {
@@ -54,7 +54,7 @@ $('button.btn').on('click tap', function() {
 
 
 
-$('.ttt-box').on('click tap', function() {
+$('.ttt-box').on('click touchStart', function() {
     var getDataVal = parseInt($(this).attr("data-value"));
     var clickedIndex = $(this).index();
     moveCalc(getDataVal, vsToWho, clickedIndex);
