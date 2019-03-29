@@ -392,31 +392,31 @@ function checkWinChange(valuesMatriss, checkVal) {
 
             if (valuesMatriss[i-7] == checkVal) {
 
-                if ( (valuesMatriss[i - 5] === checkVal && valuesMatriss[0] === 0) && (valuesMatriss[i - 6] != 0 && valuesMatriss[i - 2] != 0 ))  {
+                if ( (valuesMatriss[i - 5] === checkVal && valuesMatriss[0] === 0) && (valuesMatriss[i - 6] == 0 && valuesMatriss[i - 2] == 0 ))  {
                     return 0;
                     break;
-                } 2-6
+                } 
             
                 
-                if ( (valuesMatriss[i - 3] === checkVal && valuesMatriss[2] === 0)  && (valuesMatriss[i - 8] != 0 && valuesMatriss[i - 6] != 0 ) ){
+                if ( (valuesMatriss[i - 3] === checkVal && valuesMatriss[2] === 0)  && (valuesMatriss[i - 8] == 0 && valuesMatriss[i - 6] == 0 ) ){
                     return 2;
                     break;
-                } 0-8
+                }
             }
                            
             
             if (valuesMatriss[i-1] == checkVal) {
             
-                if ((valuesMatriss[i - 5] === checkVal && valuesMatriss[6] === 0)  && (valuesMatriss[i - 8] != 0 && valuesMatriss[i] != 0 ) ) {
+                if ((valuesMatriss[i - 5] === checkVal && valuesMatriss[6] === 0)  && (valuesMatriss[i - 8] == 0 && valuesMatriss[i] == 0 ) ) {
                     return 6;
                     break;
-                } 0-8
+                } 
             
                 
-                if ((valuesMatriss[i - 3] === checkVal && valuesMatriss[8] === 0)  && (valuesMatriss[i - 2] != 0 && valuesMatriss[i - 6] != 0 ) ) {
+                if ((valuesMatriss[i - 3] === checkVal && valuesMatriss[8] === 0)  && (valuesMatriss[i - 2] == 0 && valuesMatriss[i - 6] == 0 ) ) {
                     return 8;
                     break;
-                } 6-2
+                } 
             }
 
 
