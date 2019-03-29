@@ -16,7 +16,7 @@ var scorebrd = [0,0];
 
 sideSelect();
 
-$('button.btn').on('click', function() {
+$('button.btn').click( function() {
 
     vsToWho = $('select').val();
     for(i=0;i < $('.tictac > div').length; i++) {
@@ -54,7 +54,7 @@ $('button.btn').on('click', function() {
 
 
 
-$('.ttt-box').on('click', function() {
+$('.ttt-box').click( function() {
     var getDataVal = parseInt($(this).attr("data-value"));
     var clickedIndex = $(this).index();
     moveCalc(getDataVal, vsToWho, clickedIndex);
@@ -508,7 +508,7 @@ function draw(getMove, getDefinedVal, getDefinedUser) {
 }
 
 function sideSelect() {
-    $('.tictac > div').on('click', function() {
+    $('.tictac > div').click( function() {
 
         for(i=0;i < $('.tictac > div').length; i++) {
             $('.tictac > div').eq(i).removeClass("selected");
@@ -611,7 +611,7 @@ $('select').change(function(){
     }
 });
 
-$(".newMatch .btn").on('click', function() {
+$(".newMatch .btn").click( function() {
 
     for(i=0;i < 9 ; i ++) {
         $('.ttt-box').eq(i).removeClass("done drawed horizontal vertical bcrosst tcrossb ");
@@ -626,7 +626,7 @@ $(".newMatch .btn").on('click', function() {
     $('.ttt-box').css('opacity','1');
 })
 
-$('.goback').on('click', function() {
+$('.goback').click( function() {
     location.reload();
 });
 
